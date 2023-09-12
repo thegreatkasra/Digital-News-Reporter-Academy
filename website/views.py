@@ -7,14 +7,13 @@ def index(request):
     return render(request,'index.html')
 
 
-#Form of contact us!!
+    
+#Form of contact us!
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            contact_instance = form.save(commit=False)  # Create instance without saving to DB
-            contact_instance.name = 'unknown'  # Change the name to "unknown"
-            contact_instance.save()  # Now save to the DB
             messages.add_message(request , messages.SUCCESS, 'Successfull !') #success message
             #return JsonResponse({'success': True})
         else:           
@@ -29,18 +28,22 @@ def contact(request):
 def about(request):
     return render(request,'about.html')
 
-def element(request):
-    return render(request,'element.html')
-
-
 
 #Form of Newsletter!! after Enter Ur email we save it and return you back to home.html !!
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+
 def Newsletter_view(request):
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
-        if form.is_valid():           
-            form.save() 
+        if form.is_valid():
+            form.save()
+            # Add a success message
+            messages.success(request, 'Thank you for subscribing to our newsletter!')
+            return HttpResponseRedirect("/")
+        else:
+            # Add an error message
+            messages.error(request, 'There was an error with your submission. Please try again.')
             return HttpResponseRedirect("/")
     else:
         return HttpResponseRedirect("/")
-

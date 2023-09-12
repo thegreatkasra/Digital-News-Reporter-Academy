@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website.apps.websiteconfig',
+    'website.apps.WebsiteConfig',
+    'blog',
     #extentions
     'captcha',
 ]
@@ -126,7 +127,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
+#Rootings
 STATIC_URL = '/static/'
 MEDIA_URL = 'media/'
 
