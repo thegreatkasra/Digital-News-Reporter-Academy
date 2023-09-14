@@ -60,7 +60,7 @@
                 {{post.content|limit_words_with_ellipsis:8}}
               </p>
               <div class="read-more">
-                <a href="/blog/{{post.id}}">Read More</a>
+                <a href="/blog{{post.id}}">Read More</a>
               </div>
             </div>
 
@@ -90,10 +90,7 @@
           {% latestpost %}
         </div>
         <!-- End sidebar recent posts-->
-        <div>
-          {% tag %}
-        </div>
-        <!-- End sidebar tags-->
+
 
       </div><!-- End sidebar -->
 

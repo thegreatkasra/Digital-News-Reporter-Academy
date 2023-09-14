@@ -61,7 +61,3 @@ def blog_search(request):
     context = {'posts':posts}
     return render(request,'blog/blog.html',context)
 
-#TAG taggit
-def tag_view(request, tag):
-    tagged_posts = Post.objects.filter(tags__name=tag)
-    return render(request, 'tagged_posts.html', {'tagged_posts': tagged_posts})
