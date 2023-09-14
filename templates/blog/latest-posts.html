@@ -1,0 +1,12 @@
+{%load static%}
+
+<h3 class="sidebar-title">Last Posts</h3>
+<div class="sidebar-item recent-posts">
+    {% for post in posts %}
+    <div class="post-item clearfix">
+        <img src="{{post.image.url}}" alt="post">
+        <h4><a href="{% url 'blog:single' pid=post.id %}">{{post.title}}</a></h4>
+        <time >{{post.published_date|date:"d M y"}}</time>
+    </div>
+    {%endfor%}
+</div>

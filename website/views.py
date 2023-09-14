@@ -14,6 +14,7 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            form.save()
             messages.add_message(request , messages.SUCCESS, 'Successfull !') #success message
             #return JsonResponse({'success': True})
         else:           

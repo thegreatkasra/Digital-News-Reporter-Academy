@@ -1,0 +1,12 @@
+{%load static%}
+<div class="col-lg-4">
+
+    <div class="sidebar">
+
+      <h3 class="sidebar-title">Search</h3>
+      <div class="sidebar-item search-form">
+        <form action="{% url 'blog:search'%}" method="get">
+          <input placeholder="Search in contents" name="s" type="text">
+          <button type="submit"><i class="bi bi-search"></i></button>
+        </form>
+      </div>

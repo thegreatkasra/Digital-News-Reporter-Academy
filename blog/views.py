@@ -1,7 +1,67 @@
-from django.shortcuts import render
+from django.shortcuts import render ,get_object_or_404
+from blog.models import Post
+from django.utils import timezone
+from django.core.paginator  import Paginator ,EmptyPage ,PageNotAnInteger
 
-def blog_view(request):
-    return render(request,'blog/blog.html')
 
-def blog_single(request):
-    return render(request,'blog/blog-single.html')
+def blog_view(request,author_username=None,**kwargs):
+    current_time = timezone.now()  
+    posts = Post.objects.filter(published_date__lte=current_time,status=1).order_by('published_date')
+    if author_username:
+        posts = posts.filter(author__username=author_username)
+    if kwargs.get('tag_name') != None:
+        posts = Post.filter(tag__name__in =[kwargs['tag_name']])
+
+    #Pagination(next-previous page)
+    posts = Paginator(posts,3)
+    try:
+        page_number = request.GET.get('page')
+        posts = posts.get_page(page_number)
+    except PageNotAnInteger:
+        posts = posts.get_page(1)
+    except EmptyPage:
+        posts = posts.get_page(1)
+
+    context = {'posts':posts}
+    return render(request,'blog/blog.html',context)
+    
+
+def blog_single(request, pid):
+    current_time = timezone.now() 
+    all_posts = Post.objects.all()
+     #status=1 فقط به منتشر شده ها دسترسی نمایش میده
+     #get_object_or_404 :  یعنی اگر نبود پیام 404 
+    post = get_object_or_404(all_posts, pk=pid, status=1 ,published_date__lte=current_time)
+    #هر با دیده شود یکی اضافه کند
+    post.counted_views += 1
+    post.save()
+
+    prev_post = all_posts.filter(pk__lt=pid,status=1).last()
+    next_post = all_posts.filter(pk__gt=pid,status=1).first()
+    
+    context = {
+        'post': post,
+        'prev_post': prev_post,
+        'next_post': next_post,
+    }
+    return render(request,'blog/blog-single.html',context)
+
+#make url for categories
+def blog_category(request, cat_name):
+    posts = Post.objects.filter(status=1)
+    posts = posts.filter(category__name=cat_name)
+    context = {'posts':posts}
+    return render(request,'blog/categories-posts.html',context)
+
+#SEARCH function
+def blog_search(request):
+    posts = Post.objects.filter(status=1)
+    if request.method == 'GET':
+        posts = posts.filter(content__contains = request.GET.get('s'))
+    context = {'posts':posts}
+    return render(request,'blog/blog.html',context)
+
+#TAG taggit
+def tag_view(request, tag):
+    tagged_posts = Post.objects.filter(tags__name=tag)
+    return render(request, 'tagged_posts.html', {'tagged_posts': tagged_posts})

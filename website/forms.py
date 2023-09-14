@@ -15,11 +15,10 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ['name', 'subject','email', 'message']
 
-        def clean_name(self):
-            return 'unknown'
            
     
 class NewsletterForm(forms.ModelForm):
     class Meta:
         model = Newsletter
         fields = ['email']
+

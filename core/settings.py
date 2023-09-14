@@ -39,9 +39,35 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'website.apps.WebsiteConfig',
     'blog',
-    #extentions
+    #extentions:
+    'django.contrib.humanize',
+    #'django.contrib.sites',
+    #'django.contrib.sitemaps',
+    #'robots',
+    'taggit',
+    'django_summernote',
     'captcha',
+    #'compressor'
+    
 ]
+
+#catpcha (simple-captcha) for admin.py
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
+#sites_id framework for SEO:
+SITE_ID = 2
+
+
+#Robot cnfigurations:
+ROBOTS = {
+    "User-agent": "*",
+    "Disallow": ["/private/", "/admin/"],
+    "Allow": ["/public/"],
+    "Crawl-delay": 5,
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,6 +77,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     #'mysite.middleware.RedirectToSplashMiddleware'
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -138,4 +165,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "statics",
 ]
 
+#SUMMERNOTE SETTINGS
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'lang': 'fa-IR',  # Use 'fa-IR' for Persian
+    },
+}
 
