@@ -33,7 +33,7 @@
           <article class="entry">
 
             <div class="entry-img">
-              <img src="{% static 'img/blog/blog-1.jpg' %}" alt="post" class="img-fluid">
+              <img src="{{ post.image.url }}" alt="post" class="img-fluid">
             </div>
 
             <h2 class="entry-title">
@@ -45,9 +45,9 @@
                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">
                     {{post.author}}</a></li>
                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                    href="blog-single.html"><time>{{post.published_date|naturaltime}}</time></a></li>
-                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">
-                    >{{post.counted_views}}</a></li>
+                    href="@"><time>{{post.published_date|naturaltime}}</time></a></li>
+                <li class="d-flex align-items-center"><i></i> <a href="#">
+                    Counted Views: {{post.counted_views}}</a></li>
                 {% for cat in post.category.all %}
                 <li class="d-flex align-items-center"><i></i> <a
                     href="{% url 'blog:category' cat_name=cat.name %}">{{cat.name}}</a></li>
@@ -56,9 +56,9 @@
             </div>
 
             <div class="entry-content">
-              <p>
-                {{post.content|limit_words_with_ellipsis:8}}
-              </p>
+
+              {{post.content|limit_words_with_ellipsis:11}}
+
               <div class="read-more">
                 <a href="/blog{{post.id}}">Read More</a>
               </div>
@@ -90,7 +90,15 @@
           {% latestpost %}
         </div>
         <!-- End sidebar recent posts-->
+        <h3 class="sidebar-title">Tags</h3>
+        <div class="sidebar-item tags">
+          <ul>
+            {% for tag in all_tags %}
+            <a href="{% url 'blog:tag' tag_name=tag.name %}">{{ tag.name }}</a>
 
+            {% endfor %}
+          </ul>
+        </div>
 
       </div><!-- End sidebar -->
 

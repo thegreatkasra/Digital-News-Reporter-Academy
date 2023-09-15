@@ -2,28 +2,35 @@ from django.shortcuts import render ,get_object_or_404
 from blog.models import Post
 from django.utils import timezone
 from django.core.paginator  import Paginator ,EmptyPage ,PageNotAnInteger
+from taggit.models import Tag
 
 
-def blog_view(request,author_username=None,**kwargs):
+def blog_view(request, author_username=None, **kwargs):
     current_time = timezone.now()  
-    posts = Post.objects.filter(published_date__lte=current_time,status=1).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=current_time, status=1).order_by('-published_date')
+
     if author_username:
         posts = posts.filter(author__username=author_username)
-    if kwargs.get('tag_name') != None:
-        posts = Post.filter(tag__name__in =[kwargs['tag_name']])
 
-    #Pagination(next-previous page)
-    posts = Paginator(posts,3)
+    if kwargs.get('tag_name') is not None:
+        # Use filter instead of Post.filter
+        posts = posts.filter(tags__name__in=[kwargs['tag_name']])
+
+    # Pagination (next-previous page)
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+
     try:
-        page_number = request.GET.get('page')
-        posts = posts.get_page(page_number)
+        posts = paginator.page(page_number)
     except PageNotAnInteger:
-        posts = posts.get_page(1)
+        posts = paginator.page(1)
     except EmptyPage:
-        posts = posts.get_page(1)
+        posts = paginator.page(paginator.num_pages)
 
-    context = {'posts':posts}
-    return render(request,'blog/blog.html',context)
+    all_tags = Tag.objects.all()
+
+    context = {'posts': posts, 'all_tags': all_tags}
+    return render(request, 'blog/blog.html', context)
     
 
 def blog_single(request, pid):
@@ -38,11 +45,14 @@ def blog_single(request, pid):
 
     prev_post = all_posts.filter(pk__lt=pid,status=1).last()
     next_post = all_posts.filter(pk__gt=pid,status=1).first()
-    
+
+    all_tags = Tag.objects.all()
+
     context = {
         'post': post,
         'prev_post': prev_post,
         'next_post': next_post,
+        'all_tags': all_tags,
     }
     return render(request,'blog/blog-single.html',context)
 

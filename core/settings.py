@@ -28,6 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'    #for summernote security
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -156,19 +159,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Rootings
 STATIC_URL = '/static/'
-MEDIA_URL = 'media/'
-
 STATIC_ROOT = BASE_DIR / 'static'
+
 MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "statics",
 ]
-
-#SUMMERNOTE SETTINGS
-SUMMERNOTE_CONFIG = {
-    'summernote': {
-        'lang': 'fa-IR',  # Use 'fa-IR' for Persian
-    },
-}
 
