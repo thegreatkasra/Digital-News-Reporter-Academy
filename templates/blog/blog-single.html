@@ -71,6 +71,115 @@
 
             </div>
 
+            <!--paginator buttons-->
+            <div class="entry-footer"></div>
+            <div class="entry-footer"></div>
+            <div class="navigation-area">
+              <div class="row">
+
+                <!-- Previous Post Button -->
+                {% if prev_post %}
+                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                  <div class="navigation-button">
+                    <a href="{% url 'blog:single' prev_post.pk %}" class="btn btn-primary">Prev Post</a>
+                  </div>
+                </div>
+                {% endif %}
+
+                <!-- Next Post Button -->
+                {% if next_post %}
+                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                  <div class="navigation-button">
+                    <a href="{% url 'blog:single' next_post.pk %}" class="btn btn-primary">Next Post</a>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+           
+
+            <!--paginator details-->
+            <div class="navigation-area">
+              <div class="row">
+
+
+                <style>
+                  .thumb img {
+                    width: 100px;
+                    height: 60px;
+                    border-radius: 10px;
+                    margin-top: 10px;
+                  }
+                </style>
+
+
+                {% if prev_post %}
+                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+
+                  <div class="thumb">
+                    {% if prev_post %}
+                    <a href="{% url 'blog:single' prev_post.pk  %}">
+                      {%endif%}
+                      <img class="img-fluid" src="{{ prev_post.image.url }}" alt="">
+                    </a>
+                    <p>{{ prev_post.title|limit_words_with_ellipsis:1}}</p>
+                  </div>
+                  <div class="arrow">
+                    {% if prev_post %}
+                    <a href="{% url 'blog:single' prev_post.pk  %}">
+                      {%endif%}
+                      <span class="lnr text-white lnr-arrow-left"></span>
+                    </a>
+      
+                  </div>
+
+                  <div class="read-more">
+
+                    
+                    {% if prev_post %}
+                    <a href="{% url 'blog:single' prev_post.pk  %}">
+                      {%endif%}
+                      <h4></h4>
+                    </a>
+                  </div>
+
+                </div>
+                {%endif%}
+
+                {% if next_post %}
+                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+
+                  <div class="detials">
+                    
+                    {% if next_post %}
+                    <a href="{% url 'blog:single' next_post.pk  %}">
+                      {%endif%}
+                      <h4></h4>
+                    </a>
+                    
+                  </div>
+                  <div class="arrow">
+                    {% if next_post %}
+                    <a href="{% url 'blog:single' next_post.pk  %}">
+                      {%endif%}
+                      <span class="lnr text-white lnr-arrow-right"></span></a>
+                  </div>
+
+
+                  <div class="thumb">
+                    {% if next_post %}
+                    <a href="{% url 'blog:single' next_post.pk  %}">
+                      {%endif%}
+                      <img class="img-fluid" src="{{ next_post.image.url }}" alt=""></a>
+                      <p>{{ next_post.title|limit_words_with_ellipsis:1}}</p>
+                  </div>
+                  
+                </div>
+                {%endif%}
+              </div>
+            </div>
+
+            <!--end ofpaginator-->
           </article>
           <!--Commenting system-->
 
