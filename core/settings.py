@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'website.apps.WebsiteConfig',
     'blog',
+    'accounts',
     #extentions:
     'django.contrib.humanize',
-    #'django.contrib.sites',
-    #'django.contrib.sitemaps',
-    #'robots',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'robots',
     'taggit',
     'django_summernote',
     'captcha',
@@ -66,7 +67,7 @@ SITE_ID = 2
 #Robot cnfigurations:
 ROBOTS = {
     "User-agent": "*",
-    "Disallow": ["/private/", "/admin/"],
+    "Disallow": ["/private/", "/admin/","http://127.0.0.1:8000/admin"],
     "Allow": ["/public/"],
     "Crawl-delay": 5,
 }
@@ -168,3 +169,17 @@ STATICFILES_DIRS = [
     BASE_DIR / "statics",
 ]
 
+#login with email
+AUTHENTICATION_BACKENDS = [
+    
+    'core.custom_auth_backend.CustomBackend',
+    
+]
+
+#Forget_password
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'websiteback741@gmail.com'
+EMAIL_HOST_PASSWORD = 'wglfhppkzljalikj'
