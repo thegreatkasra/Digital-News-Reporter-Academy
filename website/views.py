@@ -48,3 +48,11 @@ def Newsletter_view(request):
             return HttpResponseRedirect("/")
     else:
         return HttpResponseRedirect("/")
+
+
+# 404 and 500 handler
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
+
+def custom_500(request):
+    return render(request, '500.html', status=500)

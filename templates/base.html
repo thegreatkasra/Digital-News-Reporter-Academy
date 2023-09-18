@@ -51,13 +51,7 @@
                     <i><a> | </a></i>
                     <i><a href="{% url 'accounts:signup' %}">Signup</a></i>
                     {% endif %}
-            </div>
-            <div class="social-links d-none d-md-flex align-items-center">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-            </div>
+
         </div>
     </section>
 
@@ -66,7 +60,7 @@
         <div class="container d-flex justify-content-between">
 
             <div class="logo">
-                <h1 class="text-light"><a href="{% url 'website:index' %}">KASRA TORABI</h1>
+                <h1 class="text-light"><a href="{% url 'website:index' %}">Smartworks Academy</h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="{% url 'website:index' %}"><img src="{% static 'img/logo.png' %}" alt="" class="img-fluid"></a>-->
             </div>
@@ -103,35 +97,41 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>Flattern</h3>
+                        <h3>Smartworks</h3>
                         <p>
                             A108 Adam Street <br>
                             New York, NY 535022<br>
                             United States <br><br>
                             <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            <strong>Email:</strong> smartworks@gmail.com<br>
                         </p>
                     </div>
 
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:index' %}">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:about' %}">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:contact' %}">Contact us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'blog:index' %}">Blog</a></li>
+
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
+                        <h4>account</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li><i class="bx bx-chevron-right"><a href="#">Logged in as {{ request.user.username }}</a></i></li> 
+                            
+                            <li><i class="bx bx-chevron-right"><a href="{% url 'accounts:logout' %}">Logout</a></i></li>
+                            {% else %}
+                            <li><i class="bx bx-chevron-right"><a href="{% url 'accounts:login' %}">Login</a></i></li>
+                            
+                            <li><i class="bx bx-chevron-right"><a href="{% url 'accounts:signup' %}">Signup</a></i></li>
+                            {% endif %}
+
+
                         </ul>
                     </div>
 
@@ -160,14 +160,11 @@
 
             <div class="me-md-auto text-center text-md-start">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>Flattern</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>Kasra Torabi</span></strong>. All Rights Reserved
                 </div>
                 <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    
+                    Designed by <a href="#">Kasra Torabi</a>
                 </div>
             </div>
             <div class="social-links text-center text-md-right pt-3 pt-md-0">

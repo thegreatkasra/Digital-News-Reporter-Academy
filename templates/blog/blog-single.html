@@ -78,6 +78,15 @@
               <div class="row">
 
                 <!-- Previous Post Button -->
+
+
+                <style>
+               .btn-primary {
+                  background-color: rgba(77, 109, 151, 0.993);
+                  color: white; 
+                }
+                </style>
+
                 {% if prev_post %}
                 <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                   <div class="navigation-button">
@@ -120,7 +129,7 @@
                     {% if prev_post %}
                     <a href="{% url 'blog:single' prev_post.pk  %}">
                       {%endif%}
-                      <img class="img-fluid" src="{{ prev_post.image.url }}" alt="">
+                      <img class="img-fluid" src="{{ prev_post.image.url }}" alt="post">
                     </a>
                     <p>{{ prev_post.title|limit_words_with_ellipsis:1}}</p>
                   </div>
@@ -170,7 +179,7 @@
                     {% if next_post %}
                     <a href="{% url 'blog:single' next_post.pk  %}">
                       {%endif%}
-                      <img class="img-fluid" src="{{ next_post.image.url }}" alt=""></a>
+                      <img class="img-fluid" src="{{ next_post.image.url }}" alt="post"></a>
                       <p>{{ next_post.title|limit_words_with_ellipsis:1}}</p>
                   </div>
                   
