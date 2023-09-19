@@ -1,4 +1,7 @@
-{%load static%}
+{% load static %}
+{% load compress %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +10,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>{% block title %} {% endblock %}</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta content="Learn how to become a successful reporter with our digital news reporting academy. Get hands-on training in journalism, writing, and reporting skills. Start your journey in journalism today!" name="description">
+    <meta content="digital news reporting, journalism training, reporter academy, journalism courses, reporting skills, journalism classes, news writing, journalism education" name="keywords">
 
     <!-- Favicons -->
     <link href="{% static 'img/favicon.png' %}" rel="icon">
@@ -20,6 +23,7 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
+    {% compress css %}
     <link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -27,10 +31,12 @@
     <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    {% endcompress %}
 
     <!-- Template Main CSS File -->
+    {% compress css %}
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
+    {% endcompress %}
     <!-- =======================================================
         ======================================================== -->
 </head>
@@ -181,6 +187,7 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    {% compress js %}
     <script src="{% static 'vendor/aos/aos.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
@@ -188,10 +195,13 @@
     <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
     <script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}"></script>
     <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+    {% endcompress %}
     <script id="dsq-count-scr" src="//mycv-2.disqus.com/count.js" async></script>
 
     <!-- Template Main JS File -->
+    {% compress js %}
     <script src="{% static 'js/main.js' %}"></script>
+    {% endcompress %}
 
 </body>
 

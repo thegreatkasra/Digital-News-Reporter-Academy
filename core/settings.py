@@ -16,53 +16,19 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+#some security
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True    
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2a5yhd!&fqiz4ve*n@&9i$sdxr+57m%hk9z8u#hy22xt2=b(z_'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
-
-
-X_FRAME_OPTIONS = 'SAMEORIGIN'    #for summernote security
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    'multi_captcha_admin',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'website.apps.WebsiteConfig',
-    'blog',
-    'accounts',
-    #extentions:
-    'django.contrib.humanize',
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
-    'robots',
-    'taggit',
-    'django_summernote',
-    'captcha',
-    #'compressor'
-    
-]
 
 #catpcha (simple-captcha) for admin.py
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'simple-captcha',
 }
-
-#sites_id framework for SEO:
-SITE_ID = 2
 
 
 #Robot cnfigurations:
@@ -105,15 +71,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -158,17 +115,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#Rootings
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
-
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = 'media/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / "statics",
-]
-
 #login with email
 AUTHENTICATION_BACKENDS = [
     
@@ -183,3 +129,14 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'websiteback741@gmail.com'
 EMAIL_HOST_PASSWORD = 'wglfhppkzljalikj'
+
+
+#compress
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
