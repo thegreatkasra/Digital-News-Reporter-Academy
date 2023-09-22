@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-2a5yhd!&fqiz4ve*n@&9i$sdxr+57m%hk9z8u#hy22xt2=b(z_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["kasratorabi.com","www.kasratorabi.com"]
+ALLOWED_HOSTS = ["*"]
 
 #sites_id framework for SEO:
 SITE_ID = 2
