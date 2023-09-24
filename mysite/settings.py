@@ -16,9 +16,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-#some security
+#some security  "production mode"
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True    
+SECURE_BROWSER_XSS_FILTER = True
+
 
 
 # Quick-start development settings - unsuitable for production
