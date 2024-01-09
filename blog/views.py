@@ -15,6 +15,8 @@ def blog_view(request, author_username=None, **kwargs):
     if kwargs.get('tag_name') is not None:
         # Use filter instead of Post.filter
         posts = posts.filter(tags__name__in=[kwargs['tag_name']])
+        
+    all_tags = Tag.objects.all()
 
     # Pagination (next-previous page)
     paginator = Paginator(posts, 3)
@@ -27,7 +29,7 @@ def blog_view(request, author_username=None, **kwargs):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    all_tags = Tag.objects.all()
+    
 
     context = {'posts': posts, 'all_tags': all_tags}
     return render(request, 'blog/blog.html', context)

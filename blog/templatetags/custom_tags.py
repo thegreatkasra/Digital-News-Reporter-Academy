@@ -39,4 +39,3 @@ def search_bar():
 @register.inclusion_tag('blog/tagged_posts.html')
 def tag():
     return {}
-
